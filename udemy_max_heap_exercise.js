@@ -24,6 +24,13 @@ new class MaxBinaryHeap {
   }
 
   insert(value) {
-    
+    const bubbleUp = (index) => {
+      
+    }
+    this.values.push(value);
+    if(this.values.length > 1) {
+      bubbleUp(this.values[this.values.length - 1]);
+    }
+    return this.values;
   }
 }
