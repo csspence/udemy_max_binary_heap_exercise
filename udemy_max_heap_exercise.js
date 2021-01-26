@@ -18,19 +18,41 @@ To find a parent of a child node at index n...
 It's parent is at index (n-1)/2 floored
 */
 
-new class MaxBinaryHeap {
+class MaxBinaryHeap {
   constructor() {
     this.values = [];
   }
 
   insert(value) {
     const bubbleUp = (index) => {
-      
+      let child = index;
+      let parent = this.values[Math.floor((child - 1) / 2)];
+      let placeHolder1;
+      let placeHolder2;
+      if(this.values[child] > this.values[parent]) {
+        placeHolder1 = this.values[child];
+        placeHolder2 = child;
+        this.values[child] = this.values[parent];
+        this.values[parent] = placeHolder1;
+        child = parent;
+        parent = placeHolder2;
+        if(this.values[Math.floor((parent - 1) / 2)] !== undefined) {
+          bubbleUp(Math.floor((parent - 1) / 2));
+        }
+      }
     }
     this.values.push(value);
     if(this.values.length > 1) {
-      bubbleUp(this.values[this.values.length - 1]);
+      bubbleUp(this.values.length - 1);
     }
     return this.values;
   }
 }
+
+// let test = new MaxBinaryHeap;
+// test.insert(100);
+// test.insert(75);
+// test.insert(80);
+// test.insert(90);
+// test.insert(95);
+// test.insert(125);
