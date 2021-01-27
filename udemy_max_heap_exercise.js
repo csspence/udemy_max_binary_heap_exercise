@@ -23,29 +23,22 @@ class MaxBinaryHeap {
     this.values = [];
   }
 
-  insert(value) {
-    const bubbleUp = (index) => {
-      let child = index;
-      let parent = this.values[Math.floor((child - 1) / 2)];
-      let placeHolder1;
-      let placeHolder2;
-      if(this.values[child] > this.values[parent]) {
-        placeHolder1 = this.values[child];
-        placeHolder2 = child;
-        this.values[child] = this.values[parent];
-        this.values[parent] = placeHolder1;
-        child = parent;
-        parent = placeHolder2;
-        if(this.values[Math.floor((parent - 1) / 2)] !== undefined) {
-          bubbleUp(Math.floor((parent - 1) / 2));
-        }
-      }
+  insert(element) {
+    this.values.push(element);
+    this.bubbleUp();
+  }
+
+  bubbleUp () {
+    let idx = this.values.length - 1;
+    const element = this.values[idx];
+    while(idx > 0) {
+      let parentIdx = Math.floor((idx - 1) / 2);
+      let parent = this.values[parentIdx];
+      if(element <= parent) break;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
+      idx = parentIdx;
     }
-    this.values.push(value);
-    if(this.values.length > 1) {
-      bubbleUp(this.values.length - 1);
-    }
-    return this.values;
   }
 }
 
@@ -56,3 +49,4 @@ class MaxBinaryHeap {
 // test.insert(90);
 // test.insert(95);
 // test.insert(125);
+// console.log(test.values);
