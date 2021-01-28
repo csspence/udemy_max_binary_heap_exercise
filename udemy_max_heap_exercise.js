@@ -49,10 +49,45 @@ class MaxBinaryHeap {
     this.values[firstIdx] = placeHolder;
     placeHolder = this.values[finalIdx];
     this.values.pop();
-    //this.bubbleDown();
+    this.bubbleDown();
     return placeHolder;
   }
 
+  bubbleDown () {
+    let idx = 0;
+    let parent = this.values[idx];
+    let placeHolder;
+    const swapper = (idx1, idx2) => {
+      placeHolder = idx1;
+      idx1 = idx2;
+      idx2 = placeHolder;
+    }
+    while(idx < this.values.length - 1) {
+      let leftIdx = 2 * (idx + 1); 
+      let rightIdx = 2 * (idx + 2);
+      let leftChild = this.values[leftIdx];
+      let rightChild = this.values[rightIdx];
+      if(leftChild > parent && rightChild < parent) {
+        swapper(leftChild, parent);
+        idx = leftIdx;
+      } else if(rightChild > parent && leftChild < parent) {
+        swapper(rightChild, parent);
+        idx = rightIdx;
+      } else if(rightChild > parent && leftChild > parent) {
+        if(rightChild > leftChild) {
+          swapper(rightChild, parent);
+          idx = rightIdx;
+        }
+        if(leftChild > rightChild) {
+          swapper(leftChild, parent);
+          idx = leftIdx;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  
 }
 
 // let test = new MaxBinaryHeap;
