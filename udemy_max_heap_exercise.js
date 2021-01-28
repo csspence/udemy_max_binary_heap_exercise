@@ -40,6 +40,19 @@ class MaxBinaryHeap {
       idx = parentIdx;
     }
   }
+
+  extractMax () {
+    let finalIdx = this.values.length - 1;
+    let firstIdx = 0;
+    let placeHolder = this.values[finalIdx];
+    this.values[finalIdx] = this.values[firstIdx];
+    this.values[firstIdx] = placeHolder;
+    placeHolder = this.values[finalIdx];
+    this.values.pop();
+    //this.bubbleDown();
+    return placeHolder;
+  }
+
 }
 
 // let test = new MaxBinaryHeap;
@@ -49,4 +62,6 @@ class MaxBinaryHeap {
 // test.insert(90);
 // test.insert(95);
 // test.insert(125);
+// console.log(test.values);
+// test.extractMax();
 // console.log(test.values);
