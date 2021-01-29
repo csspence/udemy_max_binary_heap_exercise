@@ -55,31 +55,31 @@ class MaxBinaryHeap {
 
   bubbleDown () {
     let idx = 0;
-    let parent = this.values[idx];
-    let placeHolder;
+    const length = this.values.length;
+    let element = this.values[0];
     const swapper = (idx1, idx2) => {
-      placeHolder = idx1;
+      let placeHolder = idx1;
       idx1 = idx2;
       idx2 = placeHolder;
     }
-    while(idx < this.values.length - 1) {
+    while(true) {
       let leftIdx = 2 * (idx + 1); 
       let rightIdx = 2 * (idx + 2);
       let leftChild = this.values[leftIdx];
       let rightChild = this.values[rightIdx];
-      if(leftChild > parent && rightChild < parent) {
-        swapper(leftChild, parent);
+      if(leftChild > element && rightChild < element) {
+        swapper(leftChild, element);
         idx = leftIdx;
-      } else if(rightChild > parent && leftChild < parent) {
-        swapper(rightChild, parent);
+      } else if(rightChild > element && leftChild < element) {
+        swapper(rightChild, element);
         idx = rightIdx;
-      } else if(rightChild > parent && leftChild > parent) {
+      } else if(rightChild > element && leftChild > element) {
         if(rightChild > leftChild) {
-          swapper(rightChild, parent);
+          swapper(rightChild, element);
           idx = rightIdx;
         }
         if(leftChild > rightChild) {
-          swapper(leftChild, parent);
+          swapper(leftChild, element);
           idx = leftIdx;
         }
       } else {
@@ -90,13 +90,13 @@ class MaxBinaryHeap {
   
 }
 
-// let test = new MaxBinaryHeap;
-// test.insert(100);
-// test.insert(75);
-// test.insert(80);
-// test.insert(90);
-// test.insert(95);
-// test.insert(125);
-// console.log(test.values);
-// test.extractMax();
-// console.log(test.values);
+let test = new MaxBinaryHeap;
+test.insert(100);
+test.insert(75);
+test.insert(80);
+test.insert(90);
+test.insert(95);
+test.insert(125);
+console.log(test.values);
+test.extractMax();
+console.log(test.values);
