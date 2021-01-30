@@ -90,13 +90,13 @@ class MaxBinaryHeap {
   
 }
 
-let test = new MaxBinaryHeap;
-test.insert(100);
-test.insert(75);
-test.insert(80);
-test.insert(90);
-test.insert(95);
-test.insert(125);
-console.log(test.values);
-test.extractMax();
-console.log(test.values);
+// let test = new MaxBinaryHeap;
+// test.insert(100);
+// test.insert(75);
+// test.insert(80);
+// test.insert(90);
+// test.insert(95);
+// test.insert(125);
+// console.log(test.values);
+// test.extractMax();
+// console.log(test.values);
