@@ -57,34 +57,31 @@ class MaxBinaryHeap {
     let idx = 0;
     const length = this.values.length;
     let element = this.values[0];
-    const swapper = (idx1, idx2) => {
-      let placeHolder = idx1;
-      idx1 = idx2;
-      idx2 = placeHolder;
-    }
     while(true) {
-      let leftIdx = 2 * (idx + 1); 
-      let rightIdx = 2 * (idx + 2);
-      let leftChild = this.values[leftIdx];
-      let rightChild = this.values[rightIdx];
-      if(leftChild > element && rightChild < element) {
-        swapper(leftChild, element);
-        idx = leftIdx;
-      } else if(rightChild > element && leftChild < element) {
-        swapper(rightChild, element);
-        idx = rightIdx;
-      } else if(rightChild > element && leftChild > element) {
-        if(rightChild > leftChild) {
-          swapper(rightChild, element);
-          idx = rightIdx;
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if(leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if(leftChild > element) {
+          swap = leftChildIdx;
         }
-        if(leftChild > rightChild) {
-          swapper(leftChild, element);
-          idx = leftIdx;
-        }
-      } else {
-        break;
       }
+      if(rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if(
+          (swap === null && rightChild > element) || 
+          (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+      if(swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap
     }
   }
   
